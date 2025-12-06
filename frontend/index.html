@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Welcome! Frontend served by Nginx</h1>
+    <p>Backend data:</p>
+    <pre id="data">Loading…</pre>
+    <script>
+      fetch("/api/items")
+        .then((r) => r.json())
+        .then((d) => {
+          document.getElementById("data").textContent = JSON.stringify(
+            d,
+            null,
+            2
+          );
+        })
+        .catch(
+          (e) => (document.getElementById("data").textContent = "Error: " + e)
+        );
+    </script>
+</body>
+</html>
