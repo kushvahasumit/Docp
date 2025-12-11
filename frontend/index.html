@@ -7,21 +7,22 @@
 </head>
 <body>
   <h1>Welcome! Frontend served by Nginx</h1>
-    <p>Backend data:</p>
-    <pre id="data">Loading…</pre>
-    <script>
-      fetch("/api/items")
-        .then((r) => r.json())
-        .then((d) => {
-          document.getElementById("data").textContent = JSON.stringify(
-            d,
-            null,
-            2
-          );
-        })
-        .catch(
-          (e) => (document.getElementById("data").textContent = "Error: " + e)
-        );
-    </script>
+  <p>Backend data:</p>
+  <pre id="data">Loading…</pre>
+  
+  <script>
+    async function loadBackendData() {
+      try {
+        const response = await fetch("/api/items");
+        const data = await response.json();
+        const formattedData = JSON.stringify(data, null, 2);
+        document.getElementById("data").textContent = formattedData;
+      } catch (error) {
+        document.getElementById("data").textContent = `Error: ${error}`;
+      }
+    }
+    
+    loadBackendData();
+  </script>
 </body>
 </html>

@@ -4,6 +4,7 @@ const mysql = require('mysql2/promise');
 const app = express();
 const port = process.env.PORT || 4000
 
+// Database connection function
 async function getDbConnection() {
   return mysql.createConnection({
     host: process.env.DB_HOST ,
@@ -13,6 +14,7 @@ async function getDbConnection() {
   });
 }
 
+//  Define routes
 app.get('/', (req, res) => res.send('Hello from backend!'));
 app.get('/items', async (req, res) => {
   const conn = await getDbConnection()
